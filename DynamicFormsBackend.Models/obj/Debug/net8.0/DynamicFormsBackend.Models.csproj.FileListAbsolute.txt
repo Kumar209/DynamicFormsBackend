@@ -1,0 +1,15 @@
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\bin\Debug\net8.0\DynamicFormsBackend.Models.deps.json
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\bin\Debug\net8.0\DynamicFormsBackend.Models.runtimeconfig.json
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\bin\Debug\net8.0\DynamicFormsBackend.Models.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\bin\Debug\net8.0\DynamicFormsBackend.Models.pdb
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.csproj.AssemblyReference.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.AssemblyInfoInputs.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.AssemblyInfo.cs
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.csproj.CoreCompileInputs.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.sourcelink.json
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\refint\DynamicFormsBackend.Models.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.pdb
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\DynamicFormsBackend.Models.genruntimeconfig.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Models\obj\Debug\net8.0\ref\DynamicFormsBackend.Models.dll

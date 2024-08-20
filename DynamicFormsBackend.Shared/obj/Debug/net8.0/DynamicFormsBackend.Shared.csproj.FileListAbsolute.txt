@@ -1,0 +1,13 @@
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\bin\Debug\net8.0\DynamicFormsBackend.Shared.deps.json
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\bin\Debug\net8.0\DynamicFormsBackend.Shared.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\bin\Debug\net8.0\DynamicFormsBackend.Shared.pdb
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.csproj.AssemblyReference.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.AssemblyInfoInputs.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.AssemblyInfo.cs
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.csproj.CoreCompileInputs.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.sourcelink.json
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\refint\DynamicFormsBackend.Shared.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.pdb
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\ref\DynamicFormsBackend.Shared.dll

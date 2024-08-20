@@ -1,0 +1,16 @@
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\bin\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.deps.json
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\bin\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\bin\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.pdb
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\bin\Debug\net8.0\DynamicFormsBackend.Models.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\bin\Debug\net8.0\DynamicFormsBackend.Models.pdb
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.csproj.AssemblyReference.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.GeneratedMSBuildEditorConfig.editorconfig
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.AssemblyInfoInputs.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.AssemblyInfo.cs
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.csproj.CoreCompileInputs.cache
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.sourcelink.json
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicF.938528C7.Up2Date
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\refint\DynamicFormsBackend.RepositoryInterface.dll
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\DynamicFormsBackend.RepositoryInterface.pdb
+D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.RepositoryInterface\obj\Debug\net8.0\ref\DynamicFormsBackend.RepositoryInterface.dll
