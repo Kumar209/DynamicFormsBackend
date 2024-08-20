@@ -39,6 +39,8 @@ namespace DynamicFormsBackend.Models.Dto
     {
         public int Id { get; set; }
         public string Question { get; set; }
+        public int? slno { get; set; }
+
         public int? AnswerTypeId { get; set; }
 
         public string AnswerType { get; set; }  

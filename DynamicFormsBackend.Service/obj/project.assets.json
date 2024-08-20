@@ -2980,23 +2980,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {},
-    "D:\\APPS\\VS\\data\\Component tools SDKs\\NuGetPackages": {}
+    "C:\\Users\\prashant.verma\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\DynamicFormsBackend\\DynamicFormsBackend.Service\\DynamicFormsBackend.Service.csproj",
+      "projectUniqueName": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Service\\DynamicFormsBackend.Service.csproj",
       "projectName": "DynamicFormsBackend.Service",
-      "projectPath": "E:\\DynamicFormsBackend\\DynamicFormsBackend.Service\\DynamicFormsBackend.Service.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "E:\\DynamicFormsBackend\\DynamicFormsBackend.Service\\obj\\",
+      "projectPath": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Service\\DynamicFormsBackend.Service.csproj",
+      "packagesPath": "C:\\Users\\prashant.verma\\.nuget\\packages\\",
+      "outputPath": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\APPS\\VS\\data\\Component tools SDKs\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\prashant.verma\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3005,20 +3005,21 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\DynamicFormsBackend\\DynamicFormsBackend.Models\\DynamicFormsBackend.Models.csproj": {
-              "projectPath": "E:\\DynamicFormsBackend\\DynamicFormsBackend.Models\\DynamicFormsBackend.Models.csproj"
+            "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Models\\DynamicFormsBackend.Models.csproj": {
+              "projectPath": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Models\\DynamicFormsBackend.Models.csproj"
             },
-            "E:\\DynamicFormsBackend\\DynamicFormsBackend.ServiceInterface\\DynamicFormsBackend.ServiceInterface.csproj": {
-              "projectPath": "E:\\DynamicFormsBackend\\DynamicFormsBackend.ServiceInterface\\DynamicFormsBackend.ServiceInterface.csproj"
+            "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.ServiceInterface\\DynamicFormsBackend.ServiceInterface.csproj": {
+              "projectPath": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.ServiceInterface\\DynamicFormsBackend.ServiceInterface.csproj"
             },
-            "E:\\DynamicFormsBackend\\DynamicFormsBackend.Shared\\DynamicFormsBackend.Shared.csproj": {
-              "projectPath": "E:\\DynamicFormsBackend\\DynamicFormsBackend.Shared\\DynamicFormsBackend.Shared.csproj"
+            "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Shared\\DynamicFormsBackend.Shared.csproj": {
+              "projectPath": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Shared\\DynamicFormsBackend.Shared.csproj"
             }
           }
         }

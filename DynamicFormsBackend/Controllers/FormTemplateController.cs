@@ -52,7 +52,7 @@ namespace DynamicFormsBackend.Controllers
                 //For draft save
                 else if(res.success && templateDto.IsPublish == false) 
                 {
-                    return Ok(new { succes = res, message = ResponseMessage.sourceTemplateCreationSuccess });
+                    return Ok(new { success = res, message = ResponseMessage.sourceTemplateCreationSuccess });
                 }
 
                 return StatusCode(500, new { success = false, message = ResponseMessage.internalServerError });
@@ -75,7 +75,7 @@ namespace DynamicFormsBackend.Controllers
 
                 if (res != null)
                 {
-                    return Ok(new { succes = true, forms=res });
+                    return Ok(new { success = true, forms=res });
                 }
 
                 return StatusCode(500, new { success = false, message = ResponseMessage.internalServerError });
@@ -89,7 +89,7 @@ namespace DynamicFormsBackend.Controllers
         }
 
 
-        [HttpGet("GetFormById")]
+        [HttpGet("GetFormById/{formId}")]
         public async Task<IActionResult> GetFormById(int formId)
         {
             try
@@ -125,7 +125,7 @@ namespace DynamicFormsBackend.Controllers
 
 
 
-        [HttpDelete("RemoveFormById/{id}")]
+        [HttpDelete("RemoveFormById/{formId}")]
         public async Task<IActionResult> RemoveFormById(int formId)
         {
             try

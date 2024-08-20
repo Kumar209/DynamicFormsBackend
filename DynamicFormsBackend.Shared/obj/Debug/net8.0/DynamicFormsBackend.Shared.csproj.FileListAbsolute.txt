@@ -11,3 +11,16 @@ D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\D
 D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\refint\DynamicFormsBackend.Shared.dll
 D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.pdb
 D:\smartdata\Dynamics forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\ref\DynamicFormsBackend.Shared.dll
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\bin\Debug\net8.0\DynamicFormsBackend.Shared.deps.json
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\bin\Debug\net8.0\DynamicFormsBackend.Shared.dll
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\bin\Debug\net8.0\DynamicFormsBackend.Shared.pdb
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.csproj.AssemblyReference.cache
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.AssemblyInfoInputs.cache
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.AssemblyInfo.cs
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.csproj.CoreCompileInputs.cache
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.sourcelink.json
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.dll
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\refint\DynamicFormsBackend.Shared.dll
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\DynamicFormsBackend.Shared.pdb
+C:\Prashant_Office_work\Dynamic Forms\DynamicFormsBackend\DynamicFormsBackend.Shared\obj\Debug\net8.0\ref\DynamicFormsBackend.Shared.dll
