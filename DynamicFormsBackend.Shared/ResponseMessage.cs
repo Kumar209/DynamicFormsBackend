@@ -31,6 +31,10 @@ namespace DynamicFormsBackend.Shared
 
         public const string formDeleted = "Form deleted successfully";
 
+        public const string sourceTemplateUpdateSuccess = "Successfully updated form";
+
+        public const string resonseInsertedSuccess = "Successfully inserted response";
+
 
 
 

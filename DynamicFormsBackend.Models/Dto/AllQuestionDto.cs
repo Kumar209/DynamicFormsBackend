@@ -27,5 +27,17 @@ namespace DynamicFormsBackend.Models.Dto
         public string? WarningMessage { get; set; }
 
         public int? AnswerTypeId { get; set; }
+
+        public List<AnswerOptionFormDto> AnswerOptions { get; set; } = new List<AnswerOptionFormDto>();
+    }
+
+    public class AnswerOptionFormDto
+    {
+        public int Id { get; set; }
+        public string OptionValue { get; set; }
+
+        public int? NextQuestionId { get; set; }
+        public bool? Active { get; set; }
+
     }
 }

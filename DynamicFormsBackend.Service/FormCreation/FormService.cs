@@ -143,5 +143,97 @@ namespace DynamicFormsBackend.Service.FormCreation
             var forms = await _formRepository.GetSourceTemplates();
             return forms;
         }
+
+
+        public async Task<bool> UpdateSourceTemplate(int formId, SourceTemplateDto sourceTemplateDetails)
+        {
+            var existingTemplate = await _formRepository.GetSourceTemplateById(formId);
+
+            if (existingTemplate == null)
+            {
+                return false;
+            }
+
+            // Update the template properties
+            existingTemplate.FormName = sourceTemplateDetails.FormName;
+            existingTemplate.Description = sourceTemplateDetails.Description;
+            existingTemplate.IsPublish = sourceTemplateDetails.IsPublish;
+            existingTemplate.Version = sourceTemplateDetails.Version;
+            existingTemplate.ModifiedBy = 1;
+            existingTemplate.ModifiedOn = DateTime.Now;
+
+            // Update the template in the database
+            await _formRepository.UpdateSourceTemplate(existingTemplate);
+
+            // Update sections
+            foreach (var sectionDto in sourceTemplateDetails.Sections)
+            {
+                var existingSection = await _formRepository.GetSectionById(sectionDto.Id ?? 0);
+
+                if (existingSection != null)
+                {
+                    // Update existing section
+                    existingSection.SectionName = sectionDto.SectionName;
+                    existingSection.Description = sectionDto.Description;
+                    existingSection.Slno = sectionDto.Slno;
+                    existingTemplate.ModifiedBy = 1;
+                    existingSection.ModifiedOn = DateTime.Now;
+                    await _formRepository.UpdateSection(existingSection);
+
+                    // Update question mappings
+                    await UpdateQuestionMappings(existingSection.Id, sectionDto.SelectedQuestions);
+                }
+                else
+                {
+                    // If section doesn't exist, create a new one
+                    var newSection = new TemplateSection
+                    {
+                        FormId = existingTemplate.Id,
+                        SectionName = sectionDto.SectionName,
+                        Description = sectionDto.Description,
+                        Active = true,
+                        CreatedOn = DateTime.UtcNow,
+                        CreatedBy = existingTemplate.CreatedBy
+                    };
+                    await _formRepository.InsertSection(newSection);
+                    await UpdateQuestionMappings(newSection.Id, sectionDto.SelectedQuestions);
+                }
+            }
+
+            // Save all changes in one transaction
+            await _formRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+
+
+        private async Task UpdateQuestionMappings(int sectionId, List<int> selectedQuestions)
+        {
+            // Remove existing mappings
+            var existingMappings = await _formRepository.GetQuestionMappingsBySectionId(sectionId);
+
+            foreach (var mapping in existingMappings)
+            {
+                mapping.Active = false; // Soft delete
+            }
+
+            // Create new mappings
+            foreach (var questionId in selectedQuestions)
+            {
+                var newMapping = new QuestionSectionMapping
+                {
+                    QuestionId = questionId,
+                    SectionId = sectionId,
+                    Active = true,
+                };
+                await _formRepository.InsertQuestionSectionMappingEntry(newMapping);
+            }
+        }
+
+
+
+
+
     }
 }

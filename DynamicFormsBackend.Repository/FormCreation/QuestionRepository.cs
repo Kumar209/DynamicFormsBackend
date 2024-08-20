@@ -44,8 +44,11 @@ namespace DynamicFormsBackend.Repository.FormCreation
         {
 
             var questions = await _context.FormQuestions
-                            .Where(fq => fq.Active == true)
-                            .ToListAsync();
+                             .Include(q => q.AnswerMasters)
+                             .ThenInclude(am => am.AnswerOption)
+                             .ThenInclude(ao => ao.AnswerType)
+                             .Where(fq => fq.Active == true)
+                             .ToListAsync();
 
             return questions;
         }

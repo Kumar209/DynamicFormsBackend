@@ -20,5 +20,8 @@ namespace DynamicFormsBackend.ServiceInterface.FormCreation
 
 
         public Task<bool> RemoveFormById(int formId);
+
+
+        public Task<bool> UpdateSourceTemplate(int formId, SourceTemplateDto sourceTemplateDetails);
     }
 }

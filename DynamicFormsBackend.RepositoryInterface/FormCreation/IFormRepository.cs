@@ -21,6 +21,7 @@ namespace DynamicFormsBackend.RepositoryInterface.FormCreation
 
         public Task<bool> SoftDeleteFormAsync(int formId);
 
+        public Task<bool> UpdateSourceTemplate(SourceTemplate template);
 
 
 
@@ -34,5 +35,13 @@ namespace DynamicFormsBackend.RepositoryInterface.FormCreation
         public Task<IEnumerable<TemplateSection>> GetAllSections();
 
         public Task<TemplateSection> GetSectionById(int sectionId);
+
+        public Task<bool> UpdateSection(TemplateSection section);
+
+
+
+        public Task<IEnumerable<QuestionSectionMapping>> GetQuestionMappingsBySectionId(int sectionId);
+
+        public Task SaveChangesAsync();
     }
 }

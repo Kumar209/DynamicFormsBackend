@@ -55,7 +55,16 @@ namespace DynamicFormsBackend.Service.FormCreation
                 Constraint = ans.Constraint,
                 ConstraintValue = ans.ConstraintValue,
                 WarningMessage = ans.WarningMessage,
-                AnswerTypeId = ans.AnswerTypeId
+                AnswerTypeId = ans.AnswerTypeId,
+                AnswerOptions = ans.AnswerMasters
+                                .Select(am => new AnswerOptionFormDto
+                                {
+                                    Id = am.AnswerOption.Id,
+                                    OptionValue = am.AnswerOption?.OptionValue,
+                                    NextQuestionId = am.NextQuestionId
+                                })
+                                .Where(option => option.OptionValue != null)
+                                .ToList(),
             }
             ).ToList();
 
@@ -80,6 +89,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                 WarningMessage = questionDetail.WarningMessage,
                 CreatedBy = 1,
                 CreatedOn = DateTime.Now,
+                Active = true,
             };
 
             var QuestionEnitityInserted = await _questionRepository.InsertQuestion(mappedData);
@@ -96,6 +106,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                         OptionValue = option.OptionValue,
                         CreatedBy = 1,
                         CreatedOn = DateTime.Now,
+                        Active = true,
                     };
 
                      var answerOptionEntityInserted =  await _questionRepository.InsertAnswerOptions(answerOption);

@@ -105,6 +105,18 @@ namespace DynamicFormsBackend.Repository.FormCreation
             return true;
         }
 
+        public async Task<bool> UpdateSourceTemplate(SourceTemplate template)
+        {
+            _context.SourceTemplates.Update(template);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
+
+
+
+
 
 
 
@@ -140,6 +152,29 @@ namespace DynamicFormsBackend.Repository.FormCreation
             return section; 
 
         }
+
+        public async Task<bool> UpdateSection(TemplateSection section)
+        {
+            _context.TemplateSections.Update(section);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
+        public async Task<IEnumerable<QuestionSectionMapping>> GetQuestionMappingsBySectionId(int sectionId)
+        {
+            return await _context.QuestionSectionMappings
+                .Where(qsm => qsm.SectionId == sectionId && qsm.Active == true)
+                .ToListAsync();
+        }
+
+        // Add a method to save changes
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+
 
     }
 }

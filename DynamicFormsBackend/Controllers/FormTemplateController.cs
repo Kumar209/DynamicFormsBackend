@@ -44,7 +44,7 @@ namespace DynamicFormsBackend.Controllers
                 //For publish
                 if (res.success && templateDto.IsPublish == true)
                 {
-                    var formLink = $"https://localhost:4200/forms/form/?formId={res.formid}";
+                    var formLink = $"http://localhost:4200/form-response/generated-form?formId={res.formid}";
 
                     return Ok(new { success = res.success, link=formLink, message = ResponseMessage.sourceTemplateCreationSuccess });
                 }
@@ -98,7 +98,7 @@ namespace DynamicFormsBackend.Controllers
 
                 if(res != null && res.IsPublish == true)
                 {
-                    var formLink = $"https://localhost:4200/forms/form/?formId={res.Id}";
+                    var formLink = $"http://localhost:4200/form-response/generated-form?formId={res.Id}";
 
                     return Ok(new { success = true, form = res , link=formLink });
                     
@@ -147,7 +147,35 @@ namespace DynamicFormsBackend.Controllers
             }
         }
 
-        
+
+
+        [HttpPut("UpdateTemplate/{formId}")]
+        public async Task<IActionResult> UpdateTemplate(int formId, [FromBody] SourceTemplateDto templateDto)
+        {
+            if (templateDto == null || templateDto.Sections == null || !templateDto.Sections.Any())
+            {
+                return BadRequest(new { success = false, message = ResponseMessage.NullTemplateError });
+            }
+
+            try
+            {
+                var res = await _formService.UpdateSourceTemplate(formId, templateDto);
+
+                if (res)
+                {
+                    return Ok(new { success = res, message = ResponseMessage.sourceTemplateUpdateSuccess });
+                }
+
+                return StatusCode(500, new { success = res, message = ResponseMessage.internalServerError });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(500, new { success = false, message = ResponseMessage.internalServerError, error = ex.Message });
+            }
+        }
+
+
 
 
     }

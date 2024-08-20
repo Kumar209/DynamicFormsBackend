@@ -2,15 +2,19 @@
 using DynamicFormsBackend.Models.Entities;
 using DynamicFormsBackend.Repository.Authentication;
 using DynamicFormsBackend.Repository.FormCreation;
+using DynamicFormsBackend.Repository.Response;
 using DynamicFormsBackend.RepositoryInterface;
 using DynamicFormsBackend.RepositoryInterface.Authentication;
 using DynamicFormsBackend.RepositoryInterface.FormCreation;
+using DynamicFormsBackend.RepositoryInterface.Response;
 using DynamicFormsBackend.Service;
 using DynamicFormsBackend.Service.Authentication;
 using DynamicFormsBackend.Service.FormCreation;
+using DynamicFormsBackend.Service.Response;
 using DynamicFormsBackend.ServiceInterface;
 using DynamicFormsBackend.ServiceInterface.Authentication;
 using DynamicFormsBackend.ServiceInterface.FormCreation;
+using DynamicFormsBackend.ServiceInterface.Response;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -109,6 +113,10 @@ namespace DynamicFormsBackend
 
                 builder.Services.AddTransient<IQuestionService, QuestionService>();
                 builder.Services.AddTransient<IQuestionRepository,  QuestionRepository>();
+
+
+                builder.Services.AddTransient<IFormResponseService, FormResponseService>();
+                builder.Services.AddTransient<IFormResponseRepository, FormResponseRepository>();
 
 
 
