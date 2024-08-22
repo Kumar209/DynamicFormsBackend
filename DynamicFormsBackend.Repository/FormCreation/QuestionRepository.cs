@@ -30,11 +30,23 @@ namespace DynamicFormsBackend.Repository.FormCreation
 
         public async Task<FormQuestion> GetQuestionById(int id)
         {
+            /* var question = await _context.Set<FormQuestion>()
+                                 .Include(q => q.AnswerMasters)
+                                 .ThenInclude(am => am.AnswerOption)
+                                 .ThenInclude(ao => ao.AnswerType)
+                                 .FirstOrDefaultAsync(q => q.Id == id && q.Active == true);*/
+
             var question = await _context.Set<FormQuestion>()
-                                .Include(q => q.AnswerMasters)
-                                .ThenInclude(am => am.AnswerOption)
-                                .ThenInclude(ao => ao.AnswerType)
-                                .FirstOrDefaultAsync(q => q.Id == id && q.Active == true);
+                                 .Include(q => q.AnswerMasters)
+                                 .ThenInclude(am => am.AnswerOption)
+                                 .ThenInclude(ao => ao.AnswerType)
+                                 .Where(q => q.Id == id && q.Active == true)
+                                 .FirstOrDefaultAsync();
+
+            if (question != null)
+            {
+                question.AnswerMasters = question.AnswerMasters.Where(am => am.AnswerOption.Active == true).ToList();
+            }
 
             return question;
         }
@@ -135,13 +147,49 @@ namespace DynamicFormsBackend.Repository.FormCreation
 
 
 
+
+
+
+        //Update Question
         public async Task UpdateQuestion(FormQuestion questionDetail)
         {
             _context.FormQuestions.Update(questionDetail);
             await _context.SaveChangesAsync();
         }
 
+        public async Task<AnswerOption> GetAnswerOptionById(int id)
+        {
+            return await _context.AnswerOptions
+                .FirstOrDefaultAsync(ao => ao.Id == id);
+        }
 
+        public async Task<IEnumerable<AnswerMaster>> GetAnswerMastersByQuestionId(int questionId)
+        {
+            return await _context.AnswerMasters
+                .Include(am => am.AnswerOption)
+                .Where(am => am.QuestionId == questionId)
+                .ToListAsync();
+        }
 
+        public async Task<IEnumerable<AnswerMaster>> GetAnswerMastersByAnswerOptionId(int optionId)
+        {
+            return await _context.AnswerMasters
+                .Where(am => am.AnswerOptionId == optionId)
+                .ToListAsync();
+        }
+
+        public async Task UpdateAnswerOption(AnswerOption optionDetails)
+        {
+            _context.AnswerOptions.Attach(optionDetails);
+            _context.Entry(optionDetails).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAnswerMaster(AnswerMaster data)
+        {
+            _context.AnswerMasters.Attach(data);
+            _context.Entry(data).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
 }

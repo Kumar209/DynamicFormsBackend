@@ -146,20 +146,16 @@ namespace DynamicFormsBackend.Controllers
         {
             try
             {
-                /* var success = await _questionService.UpdateQuestion(questionDetails);*/
+                var result = await _questionService.UpdateQuestion(questionDetails);
 
-                /* if (success)
-                 {
-                     return Ok(new { success = true, message = "Successfully updated question" });
-                 }
-                 else
-                 {
-                     return NotFound(new { success = false, message = "Question not found" });
-                 }*/
-
-                return NotFound(new { success = false, message = ResponseMessage.NotFoundQuestion });
-
-
+                if (result.success)
+                {
+                    return Ok(new { success = result.success, message = ResponseMessage.questionUpdateSuccess });
+                }
+                else
+                {
+                    return StatusCode(500, new { success = result.success, message = ResponseMessage.internalServerError });
+                }
             }
             catch (Exception ex)
             {

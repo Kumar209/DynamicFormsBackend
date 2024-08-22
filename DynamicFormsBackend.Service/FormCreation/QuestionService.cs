@@ -133,9 +133,54 @@ namespace DynamicFormsBackend.Service.FormCreation
 
         public async Task<QuestionDto> GetQuestion(int questionId)
         {
+            /* var question = await _questionRepository.GetQuestionById(questionId);
+
+             if(question == null)
+             {
+                 return null;
+             }
+
+             // Safe access to the AnswerType property
+             var answerOption = question.AnswerMasters
+                 .Select(am => am.AnswerOption)
+                 .FirstOrDefault(ao => ao != null);
+
+             var answerType = answerOption?.AnswerType?.TypeName ?? string.Empty;
+
+             var mappedQuestion = new QuestionDto
+             {
+                 Id = questionId,
+                 Question = question.Question,
+                 Slno = question.Slno ?? 0,
+                 Size = question.Size,
+                 Required = question.Required,
+                 AnswerTypeId = question.AnswerTypeId ?? 0,
+                 DataType = question.DataType,
+                 Constraint = question.Constraint,
+                 ConstraintValue = question.ConstraintValue,
+                 WarningMessage = question.WarningMessage,
+                 CreatedBy = question.CreatedBy,
+
+
+
+                 // Map AnswerOptions to OptionDto
+                 AnswerOptions = question.AnswerMasters
+                                 .Select(am => new OptionDto
+                                 {
+                                     Id = am.AnswerOption?.Id, 
+                                     OptionValue = am.AnswerOption?.OptionValue,
+                                     NextQuestionID = am.NextQuestionId 
+                                 })
+                                 .Where(option => option.OptionValue != null)
+                                 .ToList(),
+
+             };
+
+             return mappedQuestion;*/
+
             var question = await _questionRepository.GetQuestionById(questionId);
 
-            if(question == null)
+            if (question == null)
             {
                 return null;
             }
@@ -163,16 +208,17 @@ namespace DynamicFormsBackend.Service.FormCreation
 
 
 
-                // Map AnswerOptions to OptionDto
+                // Map AnswerOptions to OptionDto, filter out inactive options
                 AnswerOptions = question.AnswerMasters
-                                .Select(am => new OptionDto
-                                {
-                                    Id = am.AnswerOption?.Id, 
-                                    OptionValue = am.AnswerOption?.OptionValue,
-                                    NextQuestionID = am.NextQuestionId 
-                                })
-                                .Where(option => option.OptionValue != null)
-                                .ToList(),
+                                  .Where(am => am.AnswerOption.Active == true)
+                                  .Select(am => new OptionDto
+                                  {
+                                      Id = am.AnswerOption?.Id,
+                                      OptionValue = am.AnswerOption?.OptionValue,
+                                      NextQuestionID = am.NextQuestionId
+                                  })
+                                  .Where(option => option.OptionValue != null)
+                                  .ToList(),
 
             };
 
@@ -188,6 +234,106 @@ namespace DynamicFormsBackend.Service.FormCreation
             return await _questionRepository.DeleteQuestionAsync(questionId);
         }
 
+
+
+
+
+
+        public async Task<(bool success, string message)> UpdateQuestion(QuestionDto questionDetail)
+        {
+            // Get the existing question
+            var existingQuestion = await _questionRepository.GetQuestionById(questionDetail.Id ?? 0);
+
+            if (existingQuestion == null)
+            {
+                return (false, "Question not found");
+            }
+
+            // Update the question
+            existingQuestion.Question = questionDetail.Question;
+            existingQuestion.Slno = questionDetail.Slno;
+            existingQuestion.Size = string.IsNullOrWhiteSpace(questionDetail.Size) ? null : questionDetail.Size;
+            existingQuestion.AnswerTypeId = questionDetail.AnswerTypeId;
+            existingQuestion.Required = questionDetail.Required;
+            existingQuestion.DataType = questionDetail.DataType;
+            existingQuestion.Constraint = questionDetail.Constraint;
+            existingQuestion.ConstraintValue = questionDetail.ConstraintValue;
+            existingQuestion.WarningMessage = questionDetail.WarningMessage;
+            existingQuestion.ModifiedBy = 1;
+            existingQuestion.ModifiedOn = DateTime.Now;
+            existingQuestion.Active = true;
+
+            await _questionRepository.UpdateQuestion(existingQuestion);
+
+            // Handle options
+            if (questionDetail.AnswerOptions != null)
+            {
+                var existingAnswerMasters = await _questionRepository.GetAnswerMastersByQuestionId(questionDetail.Id ?? 0);
+                var existingAnswerOptions = existingAnswerMasters.Select(am => am.AnswerOptionId).ToList();
+
+                // Convert DTOs to entities
+                var answerOptions = questionDetail.AnswerOptions.Select(option => new AnswerOption
+                {
+                    Id = option.Id ?? 0,
+                    AnswerTypeId = questionDetail.AnswerTypeId,
+                    OptionValue = option.OptionValue,
+                    ModifiedBy = 1,
+                    ModifiedOn = DateTime.Now,
+                    Active = true,
+                }).ToList();
+
+                // Update existing options
+                foreach (var option in answerOptions)
+                {
+                    var existingOption = await _questionRepository.GetAnswerOptionById(option.Id);
+                    if (existingOption != null)
+                    {
+                        existingOption.OptionValue = option.OptionValue;
+                        existingOption.ModifiedBy = 1;
+                        existingOption.ModifiedOn = DateTime.Now;
+                        await _questionRepository.UpdateAnswerOption(existingOption);
+                    }
+                    else
+                    {
+                        // Add new options
+                        var newAnswerOptionEntity = await _questionRepository.InsertAnswerOptions(option);
+
+                        var newAnswerMaster = new AnswerMaster
+                        {
+                            QuestionId = questionDetail.Id ?? 0,
+                            AnswerOptionId = newAnswerOptionEntity.Id,
+                            NextQuestionId = questionDetail.AnswerOptions.First(o => o.Id == option.Id).NextQuestionID
+                        };
+
+                        await _questionRepository.InsertAnswerMaster(newAnswerMaster);
+                    }
+                }
+
+                // Remove deleted options
+                var deletedOptions = existingAnswerOptions.Except(answerOptions.Select(o => o.Id)).ToList();
+                foreach (var deletedOptionId in deletedOptions)
+                {
+                    var deletedOption = await _questionRepository.GetAnswerOptionById(deletedOptionId);
+                    if (deletedOption != null)
+                    {
+                        deletedOption.Active = false;
+                        deletedOption.DeletedBy = 1;
+                        deletedOption.DeletedOn = DateTime.Now;
+                        await _questionRepository.UpdateAnswerOption(deletedOption);
+
+                        // Update related answer masters
+                        var relatedAnswerMasters = await _questionRepository.GetAnswerMastersByAnswerOptionId(deletedOptionId);
+                        foreach (var answerMaster in relatedAnswerMasters)
+                        {
+                            answerMaster.Active = false;
+                            await _questionRepository.UpdateAnswerMaster(answerMaster);
+                        }
+                    }
+                }
+            }
+
+            return (true, "Question updated successfully");
+        }
 
 
 

@@ -55,6 +55,14 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.QuestionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__AnswerMas__Quest__0539C240");
+
+            entity.HasOne(d => d.AnswerOption).WithMany(p => p.AnswerMasters)
+          .HasForeignKey(d => d.AnswerOptionId)
+          .OnDelete(DeleteBehavior.Cascade); // Add cascading delete
+
+            entity.HasOne(d => d.Question).WithMany(p => p.AnswerMasters)
+                .HasForeignKey(d => d.QuestionId)
+                .OnDelete(DeleteBehavior.Cascade); // Add cascading delet
         });
 
         modelBuilder.Entity<AnswerOption>(entity =>
@@ -72,6 +80,10 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.AnswerType).WithMany(p => p.AnswerOptions)
                 .HasForeignKey(d => d.AnswerTypeId)
                 .HasConstraintName("FK__AnswerOpt__Answe__0169315C");
+
+            entity.HasOne(d => d.AnswerType).WithMany(p => p.AnswerOptions)
+        .HasForeignKey(d => d.AnswerTypeId)
+        .OnDelete(DeleteBehavior.Cascade); // Add cascading delete
         });
 
         modelBuilder.Entity<AnswerType>(entity =>

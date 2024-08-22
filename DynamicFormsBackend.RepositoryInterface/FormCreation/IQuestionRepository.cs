@@ -23,8 +23,22 @@ namespace DynamicFormsBackend.RepositoryInterface.FormCreation
 
         public Task<bool> DeleteQuestionAsync(int questionId);
 
+
+
+
+        // Update API
         public Task UpdateQuestion(FormQuestion questionDetail);
 
+        public Task<AnswerOption> GetAnswerOptionById(int id);
+
+        public Task<IEnumerable<AnswerMaster>> GetAnswerMastersByQuestionId(int questionId);
+
+        public Task<IEnumerable<AnswerMaster>> GetAnswerMastersByAnswerOptionId(int optionId);
+
+
+        public Task UpdateAnswerOption(AnswerOption optionDetails);
+
+        public Task UpdateAnswerMaster(AnswerMaster data);
 
     }
 }

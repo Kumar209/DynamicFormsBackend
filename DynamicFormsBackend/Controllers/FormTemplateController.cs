@@ -152,10 +152,10 @@ namespace DynamicFormsBackend.Controllers
         [HttpPut("UpdateTemplate/{formId}")]
         public async Task<IActionResult> UpdateTemplate(int formId, [FromBody] SourceTemplateDto templateDto)
         {
-            if (templateDto == null || templateDto.Sections == null || !templateDto.Sections.Any())
+           /* if (templateDto == null || templateDto.Sections == null || !templateDto.Sections.Any())
             {
                 return BadRequest(new { success = false, message = ResponseMessage.NullTemplateError });
-            }
+            }*/
 
             try
             {

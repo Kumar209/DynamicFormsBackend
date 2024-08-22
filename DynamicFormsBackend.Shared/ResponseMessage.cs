@@ -35,6 +35,8 @@ namespace DynamicFormsBackend.Shared
 
         public const string resonseInsertedSuccess = "Successfully inserted response";
 
+        public const string questionUpdateSuccess = "Successfully updated question";
+
 
 
 

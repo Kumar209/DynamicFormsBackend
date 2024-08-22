@@ -158,7 +158,7 @@ namespace DynamicFormsBackend.Service.FormCreation
             existingTemplate.FormName = sourceTemplateDetails.FormName;
             existingTemplate.Description = sourceTemplateDetails.Description;
             existingTemplate.IsPublish = sourceTemplateDetails.IsPublish;
-            existingTemplate.Version = sourceTemplateDetails.Version;
+            existingTemplate.Version = sourceTemplateDetails.Version + 1;
             existingTemplate.ModifiedBy = 1;
             existingTemplate.ModifiedOn = DateTime.Now;
 

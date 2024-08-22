@@ -20,7 +20,7 @@ namespace DynamicFormsBackend.ServiceInterface.FormCreation
 
         public Task<bool> DeleteQuestionById(int questionId);
 
-        /*  public Task<bool> UpdateQuestion(QuestionDto questionDetail);*/
+        public Task<(bool success, string message)> UpdateQuestion(QuestionDto questionDetail);
 
     }
 }
