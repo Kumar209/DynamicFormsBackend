@@ -109,7 +109,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                         Active = true,
                     };
 
-                     var answerOptionEntityInserted =  await _questionRepository.InsertAnswerOptions(answerOption);
+                    var answerOptionEntityInserted = await _questionRepository.InsertAnswerOptions(answerOption);
 
 
 
@@ -265,6 +265,7 @@ namespace DynamicFormsBackend.Service.FormCreation
 
             await _questionRepository.UpdateQuestion(existingQuestion);
 
+
             // Handle options
             if (questionDetail.AnswerOptions != null)
             {
@@ -298,11 +299,15 @@ namespace DynamicFormsBackend.Service.FormCreation
                         // Add new options
                         var newAnswerOptionEntity = await _questionRepository.InsertAnswerOptions(option);
 
+                        // Ensure that the next question ID is valid
+                        var answerOptionDetail = questionDetail.AnswerOptions
+                            .FirstOrDefault(o => o.Id == option.Id);
+
                         var newAnswerMaster = new AnswerMaster
                         {
                             QuestionId = questionDetail.Id ?? 0,
                             AnswerOptionId = newAnswerOptionEntity.Id,
-                            NextQuestionId = questionDetail.AnswerOptions.First(o => o.Id == option.Id).NextQuestionID
+                            NextQuestionId = answerOptionDetail?.NextQuestionID // Handle possible null values gracefully
                         };
 
                         await _questionRepository.InsertAnswerMaster(newAnswerMaster);
@@ -334,8 +339,5 @@ namespace DynamicFormsBackend.Service.FormCreation
 
             return (true, "Question updated successfully");
         }
-
-
-
     }
 }

@@ -142,7 +142,7 @@ namespace DynamicFormsBackend.Controllers
 
 
         [HttpPut("UpdateQuestion")]
-        public async Task<IActionResult> UpdateQuestion(QuestionDto questionDetails)
+        public async Task<IActionResult> UpdateQuestion([FromBody] QuestionDto questionDetails)
         {
             try
             {
@@ -163,6 +163,8 @@ namespace DynamicFormsBackend.Controllers
                 return StatusCode(500, new { success = false, message = ResponseMessage.internalServerError, error = ex.Message });
             }
         }
+
+       
 
 
 

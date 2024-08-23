@@ -23,12 +23,12 @@ namespace DynamicFormsBackend.Service.Response
 
         public async Task<bool> AddFormResponse(FormResponseDto responseDto)
         {
-            var responsesString = string.Join(", ", responseDto.Responses.Select(r => $"{r.QuestionID}: {r.Answer}"));
+           /* var responsesString = string.Join(", ", responseDto.Responses.Select(r => $"{r.QuestionID}: {r.Answer}"));*/
 
             var mappedEntity = new FormResponse
             {
                 FormId = responseDto.FormId,
-                Response = responsesString,
+                Response = responseDto.Response,
                 Email = responseDto.Email,
                 AnswerMasterId = responseDto.AnswerMasterId ?? null,
                 Active = true,
@@ -59,7 +59,7 @@ namespace DynamicFormsBackend.Service.Response
             var mappedDto = res.Select(r => new FormResponseDto
             {
                 Id = r.FormId,
-                FormId = r.FormId,
+                FormId = r.FormId ?? 0,
                 Response = r.Response,
                 Email = r.Email,
                 AnswerMasterId = r.AnswerMasterId,
