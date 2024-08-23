@@ -21,6 +21,7 @@ namespace DynamicFormsBackend.Shared
 
         public const string sourceTemplateCreationSuccess = "Succesfully published template";
         public const string NullTemplateError = "Template or sections cannot be null";
+        public const string NoQuestionsInSectionError = "Atleast one question should be present in each section";
 
         public const string questionCreationSuccess = "Successfully created question";
         public const string NotFoundQuestion = "Question not found";
@@ -36,6 +37,8 @@ namespace DynamicFormsBackend.Shared
         public const string resonseInsertedSuccess = "Successfully inserted response";
 
         public const string questionUpdateSuccess = "Successfully updated question";
+
+        public const string SuccessResponseDeletion = "Successfully deleted response";
 
 
 

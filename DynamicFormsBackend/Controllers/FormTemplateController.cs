@@ -96,19 +96,12 @@ namespace DynamicFormsBackend.Controllers
             {
                 var res = await _formService.GetFormById(formId);
 
-                if(res != null && res.IsPublish == true)
+                if(res != null)
                 {
-                    var formLink = $"http://localhost:4200/form-response/generated-form?formId={res.Id}";
-
-                    return Ok(new { success = true, form = res , link=formLink });
+                    return Ok(new { success = true, form = res });
                     
                 }
 
-                else if (res != null && res.IsPublish == false)
-                {
-                    return Ok(new { success = true, form = res });
-
-                }
 
                 return StatusCode(500, new { success = false, message = ResponseMessage.NotFoundForm });
 
@@ -152,10 +145,19 @@ namespace DynamicFormsBackend.Controllers
         [HttpPut("UpdateTemplate/{formId}")]
         public async Task<IActionResult> UpdateTemplate(int formId, [FromBody] SourceTemplateDto templateDto)
         {
-           /* if (templateDto == null || templateDto.Sections == null || !templateDto.Sections.Any())
+            if (templateDto == null || templateDto.Sections == null || !templateDto.Sections.Any())
             {
                 return BadRequest(new { success = false, message = ResponseMessage.NullTemplateError });
-            }*/
+            }
+
+            // Validate that at least one question ID is present in each section
+            foreach (var section in templateDto.Sections)
+            {
+                if (section.SelectedQuestions == null || !section.SelectedQuestions.Any())
+                {
+                    return BadRequest(new { success = false, message = ResponseMessage.NoQuestionsInSectionError });
+                }
+            }
 
             try
             {

@@ -50,13 +50,25 @@ namespace DynamicFormsBackend.Repository.FormCreation
         public async Task<SourceTemplate> GetSourceTemplateById(int formId)
         {
 
-            var formEntity = await _context.SourceTemplates
+          /*  var formEntity = await _context.SourceTemplates
                                    .Include(f => f.TemplateSections)
                                        .ThenInclude(s => s.QuestionSectionMappings)
                                            .ThenInclude(qsm => qsm.Question)
                                                .ThenInclude(q => q.AnswerMasters)
                                                    .ThenInclude(am => am.AnswerOption)
-                                   .FirstOrDefaultAsync(f => f.Id == formId && f.Active == true);
+                                   .FirstOrDefaultAsync(f => f.Id == formId && f.Active == true);*/
+
+
+            var formEntity = await _context.SourceTemplates
+                                    .Include(f => f.TemplateSections
+                                        .Where(s => s.Active == true)) // Filter active sections
+                                    .ThenInclude(s => s.QuestionSectionMappings
+                                        .Where(qsm => qsm.Active == true)) // Filter active question-section mappings
+                                    .ThenInclude(qsm => qsm.Question)
+                                        .ThenInclude(q => q.AnswerMasters
+                                            .Where(am => am.Active == true)) // Filter active answer masters
+                                    .ThenInclude(am => am.AnswerOption)
+                                    .FirstOrDefaultAsync(f => f.Id == formId && f.Active == true);
 
 
 
@@ -168,10 +180,29 @@ namespace DynamicFormsBackend.Repository.FormCreation
                 .ToListAsync();
         }
 
+
+
+
+
+
         // Add a method to save changes
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+
+        public async Task<List<TemplateSection>> GetSectionsByFormId(int formId)
+        {
+            var sections = await _context.TemplateSections
+                .Where(s => s.FormId == formId && s.Active == true)
+                .Include(s => s.QuestionSectionMappings)
+                    .ThenInclude(qsm => qsm.Question)
+                        .ThenInclude(q => q.AnswerMasters)
+                            .ThenInclude(am => am.AnswerOption)
+                .ToListAsync();
+
+            return sections;
         }
 
 

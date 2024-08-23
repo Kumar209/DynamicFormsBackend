@@ -1,7 +1,9 @@
-﻿using DynamicFormsBackend.Models.Dto;
+﻿using Azure;
+using DynamicFormsBackend.Models.Dto;
 using DynamicFormsBackend.Models.Entities;
 using DynamicFormsBackend.RepositoryInterface.Response;
 using DynamicFormsBackend.ServiceInterface.Response;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +23,18 @@ namespace DynamicFormsBackend.Service.Response
 
         public async Task<bool> AddFormResponse(FormResponseDto responseDto)
         {
+            var responsesString = string.Join(", ", responseDto.Responses.Select(r => $"{r.QuestionID}: {r.Answer}"));
+
             var mappedEntity = new FormResponse
             {
                 FormId = responseDto.FormId,
-                Response = responseDto.Response,
+                Response = responsesString,
                 Email = responseDto.Email,
-                AnswerMasterId = responseDto.AnswerMasterId,
+                AnswerMasterId = responseDto.AnswerMasterId ?? null,
                 Active = true,
                 CreatedOn = DateTime.Now
             };
+
 
             var res = await _responseRepository.AddFormResponse(mappedEntity);
 
@@ -85,6 +90,12 @@ namespace DynamicFormsBackend.Service.Response
             };
 
             return mappedDto;
+        }
+
+
+        public async Task<bool> softDeleteResponse(int responseId)
+        {
+            return await  _responseRepository.removeFormResponse(responseId);
         }
     }
 }

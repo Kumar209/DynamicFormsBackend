@@ -1,6 +1,7 @@
 ﻿using DynamicFormsBackend.Models.Entities;
 using DynamicFormsBackend.RepositoryInterface.Response;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,22 @@ namespace DynamicFormsBackend.Repository.Response
         {
             var res = await _context.FormResponses.FirstOrDefaultAsync(fr => fr.Id == responseId && fr.Active == true);
             return res;
+        }
+
+
+        public async  Task<bool> removeFormResponse(int responseId)
+        {
+            var response = await _context.FormResponses.FirstOrDefaultAsync(r => r.Id == responseId && r.Active == true);
+
+            if(response == null) { return false; }
+
+            response.Active = false;
+            response.DeletedOn = DateTime.Now;
+            response.DeletedBy = 1;
+
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
 

@@ -92,6 +92,29 @@ namespace DynamicFormsBackend.Controllers
                 return StatusCode(500, new { success = false, message = ResponseMessage.internalServerError, error = ex.Message });
             }
         }
-     
+
+
+        [HttpDelete("DeleteResponse/{id}")]
+        public async Task<IActionResult> DeleteResponse(int id)
+        {
+            try
+            {
+                var res = await _formResponseService.softDeleteResponse(id);
+
+                if (res != null)
+                {
+                    return Ok(new { success = res, responses = ResponseMessage.SuccessResponseDeletion });
+                }
+
+                return StatusCode(500, new { success = false, message = ResponseMessage.internalServerError });
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(500, new { success = false, message = ResponseMessage.internalServerError, error = ex.Message });
+            }
+        }
+
     }
 }

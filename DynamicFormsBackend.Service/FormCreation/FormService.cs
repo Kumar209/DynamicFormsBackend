@@ -80,6 +80,8 @@ namespace DynamicFormsBackend.Service.FormCreation
 
         public async Task<FetchFormDto> GetFormById(int formId)
         {
+
+
             var formEntity = await _formRepository.GetSourceTemplateById(formId);
 
             if (formEntity == null)
@@ -96,36 +98,41 @@ namespace DynamicFormsBackend.Service.FormCreation
                 Version = formEntity.Version,
                 Active = formEntity.Active,
 
-                Sections = formEntity.TemplateSections.Select(section => new FormSectionDto
-                {
-                    Id = section.Id,
-                    SectionName = section.SectionName,
-                    Description = section.Description,
-                    Slno = section.Slno,
-                    Active = section.Active,
-
-                    Questions = section.QuestionSectionMappings.Select(qsm => new FormQuestionDto
+                Sections = formEntity.TemplateSections
+                    .Where(section => section.Active == true) // Filter inactive sections
+                    .Select(section => new FormSectionDto
                     {
-                        Id = qsm.Question.Id,
-                        Question = qsm.Question.Question,
-                       /* AnswerType = qsm.Question.AnswerType.TypeName,*/
-                       slno = qsm.Question.Slno,
-                        AnswerTypeId = qsm.Question.AnswerTypeId,
-                        DataType = qsm.Question.DataType,
-                        Constraint = qsm.Question.Constraint,
-                        ConstraintValue = qsm.Question.ConstraintValue,
-                        WarningMessage = qsm.Question.WarningMessage,
-                        Active = qsm.Active,
+                        Id = section.Id,
+                        SectionName = section.SectionName,
+                        Description = section.Description,
+                        Slno = section.Slno,
+                        Active = section.Active,
 
-                        AnswerOptions = qsm.Question.AnswerMasters.Select(am => new FormAnswerOptionDto
-                        {
-                            Id = am.AnswerOption.Id,
-                            OptionValue = am.AnswerOption.OptionValue,
-                            NextQuestionId = am.NextQuestionId,
-                            Active = am.Active
-                        }).ToList()
+                        Questions = section.QuestionSectionMappings
+                            .Where(qsm => qsm.Active == true) // Filter inactive question-section mappings
+                            .Select(qsm => new FormQuestionDto
+                            {
+                                Id = qsm.Question.Id,
+                                Question = qsm.Question.Question,
+                                slno = qsm.Question.Slno,
+                                AnswerTypeId = qsm.Question.AnswerTypeId,
+                                DataType = qsm.Question.DataType,
+                                Constraint = qsm.Question.Constraint,
+                                ConstraintValue = qsm.Question.ConstraintValue,
+                                WarningMessage = qsm.Question.WarningMessage,
+                                Active = qsm.Active,
+
+                                AnswerOptions = qsm.Question.AnswerMasters
+                                    .Where(am => am.Active == true) // Filter inactive answer options
+                                    .Select(am => new FormAnswerOptionDto
+                                    {
+                                        Id = am.AnswerOption.Id,
+                                        OptionValue = am.AnswerOption.OptionValue,
+                                        NextQuestionId = am.NextQuestionId,
+                                        Active = am.Active
+                                    }).ToList()
+                            }).ToList()
                     }).ToList()
-                }).ToList()
             };
 
             return formDto;
@@ -165,27 +172,39 @@ namespace DynamicFormsBackend.Service.FormCreation
             // Update the template in the database
             await _formRepository.UpdateSourceTemplate(existingTemplate);
 
-            // Update sections
+
+            // Get existing sections for this form
+            var existingSections = await _formRepository.GetSectionsByFormId(formId);
+            var existingSectionIds = existingSections.Select(s => s.Id).ToList();
+
+            // Prepare list to track new section IDs
+            var newSectionIds = new List<int>();
+
             foreach (var sectionDto in sourceTemplateDetails.Sections)
             {
-                var existingSection = await _formRepository.GetSectionById(sectionDto.Id ?? 0);
-
-                if (existingSection != null)
+                if (sectionDto.Id > 0)
                 {
                     // Update existing section
-                    existingSection.SectionName = sectionDto.SectionName;
-                    existingSection.Description = sectionDto.Description;
-                    existingSection.Slno = sectionDto.Slno;
-                    existingTemplate.ModifiedBy = 1;
-                    existingSection.ModifiedOn = DateTime.Now;
-                    await _formRepository.UpdateSection(existingSection);
+                    var existingSection = await _formRepository.GetSectionById(sectionDto.Id.Value);
 
-                    // Update question mappings
-                    await UpdateQuestionMappings(existingSection.Id, sectionDto.SelectedQuestions);
+                    if (existingSection != null)
+                    {
+                        existingSection.SectionName = sectionDto.SectionName;
+                        existingSection.Description = sectionDto.Description;
+                        existingSection.Slno = sectionDto.Slno;
+                        existingSection.ModifiedBy = 1;
+                        existingSection.ModifiedOn = DateTime.Now;
+                        await _formRepository.UpdateSection(existingSection);
+                        newSectionIds.Add(existingSection.Id);
+
+                        // Update question mappings for the existing section
+                        await UpdateQuestionMappings(existingSection.Id, sectionDto.SelectedQuestions);
+                    
+                    }
                 }
                 else
                 {
-                    // If section doesn't exist, create a new one
+                    // Create new section
                     var newSection = new TemplateSection
                     {
                         FormId = existingTemplate.Id,
@@ -196,9 +215,30 @@ namespace DynamicFormsBackend.Service.FormCreation
                         CreatedBy = existingTemplate.CreatedBy
                     };
                     await _formRepository.InsertSection(newSection);
+                    newSectionIds.Add(newSection.Id);
+
+                    // Update question mappings for the new section
                     await UpdateQuestionMappings(newSection.Id, sectionDto.SelectedQuestions);
                 }
             }
+
+            // Soft delete sections that are no longer present in the updated list
+            var sectionsToDelete = existingSectionIds.Except(newSectionIds).ToList();
+            foreach (var sectionId in sectionsToDelete)
+            {
+                var sectionToDelete = await _formRepository.GetSectionById(sectionId);
+                if (sectionToDelete != null)
+                {
+                    sectionToDelete.Active = false;
+                    await _formRepository.UpdateSection(sectionToDelete);
+                }
+            }
+
+            // Update question mappings for each section
+/*            foreach (var sectionDto in sourceTemplateDetails.Sections)
+            {
+                await UpdateQuestionMappings(sectionDto.Id ?? 0, sectionDto.SelectedQuestions);
+            }*/
 
             // Save all changes in one transaction
             await _formRepository.SaveChangesAsync();

@@ -43,5 +43,8 @@ namespace DynamicFormsBackend.RepositoryInterface.FormCreation
         public Task<IEnumerable<QuestionSectionMapping>> GetQuestionMappingsBySectionId(int sectionId);
 
         public Task SaveChangesAsync();
+
+
+        public Task<List<TemplateSection>> GetSectionsByFormId(int formId);
     }
 }

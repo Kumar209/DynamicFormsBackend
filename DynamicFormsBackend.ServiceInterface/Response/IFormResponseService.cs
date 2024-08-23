@@ -15,5 +15,7 @@ namespace DynamicFormsBackend.ServiceInterface.Response
         public Task<IEnumerable<FormResponseDto>> GetAllResponse(int formId);
 
         public Task<FormResponseDto> GetResponse(int responseId);
+
+        public Task<bool> softDeleteResponse(int responseId);
     }
 }

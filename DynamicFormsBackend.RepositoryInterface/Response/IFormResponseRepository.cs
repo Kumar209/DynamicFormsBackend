@@ -14,5 +14,7 @@ namespace DynamicFormsBackend.RepositoryInterface.Response
         public Task<IEnumerable<FormResponse>> GetAllResponsesByFormId(int formId);
 
         public Task<FormResponse> GetResponseById(int responseId);
+
+        public Task<bool> removeFormResponse(int responseId);
     }
 }
