@@ -15,19 +15,6 @@ namespace DynamicFormsBackend.Models.Dto
     }
 
 
-    /*    public class AnswerMasterDto
-        {
-            public int Id { get; set; }
-
-            public int QuestionId { get; set; }
-
-            public int AnswerOptionId { get; set; }
-
-            public int? NextQuestionId { get; set; }
-
-        }*/
-
-
     public class QuestionDto
     {
         public int? Id { get; set; }
@@ -54,7 +41,6 @@ namespace DynamicFormsBackend.Models.Dto
 
         public IEnumerable<OptionDto>? AnswerOptions { get; set; }
 
-/*        public IEnumerable<AnswerMasterDto>? AnswerMaster { get; set; }*/
 
     }
 }

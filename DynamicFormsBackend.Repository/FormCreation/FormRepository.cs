@@ -50,14 +50,6 @@ namespace DynamicFormsBackend.Repository.FormCreation
         public async Task<SourceTemplate> GetSourceTemplateById(int formId)
         {
 
-          /*  var formEntity = await _context.SourceTemplates
-                                   .Include(f => f.TemplateSections)
-                                       .ThenInclude(s => s.QuestionSectionMappings)
-                                           .ThenInclude(qsm => qsm.Question)
-                                               .ThenInclude(q => q.AnswerMasters)
-                                                   .ThenInclude(am => am.AnswerOption)
-                                   .FirstOrDefaultAsync(f => f.Id == formId && f.Active == true);*/
-
 
             var formEntity = await _context.SourceTemplates
                                     .Include(f => f.TemplateSections
