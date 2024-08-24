@@ -58,7 +58,7 @@ namespace DynamicFormsBackend.Service.Response
 
             var mappedDto = res.Select(r => new FormResponseDto
             {
-                Id = r.FormId,
+                Id = r.Id,
                 FormId = r.FormId ?? 0,
                 Response = r.Response,
                 Email = r.Email,
