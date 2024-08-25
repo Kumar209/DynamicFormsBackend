@@ -133,51 +133,6 @@ namespace DynamicFormsBackend.Service.FormCreation
 
         public async Task<QuestionDto> GetQuestion(int questionId)
         {
-            /* var question = await _questionRepository.GetQuestionById(questionId);
-
-             if(question == null)
-             {
-                 return null;
-             }
-
-             // Safe access to the AnswerType property
-             var answerOption = question.AnswerMasters
-                 .Select(am => am.AnswerOption)
-                 .FirstOrDefault(ao => ao != null);
-
-             var answerType = answerOption?.AnswerType?.TypeName ?? string.Empty;
-
-             var mappedQuestion = new QuestionDto
-             {
-                 Id = questionId,
-                 Question = question.Question,
-                 Slno = question.Slno ?? 0,
-                 Size = question.Size,
-                 Required = question.Required,
-                 AnswerTypeId = question.AnswerTypeId ?? 0,
-                 DataType = question.DataType,
-                 Constraint = question.Constraint,
-                 ConstraintValue = question.ConstraintValue,
-                 WarningMessage = question.WarningMessage,
-                 CreatedBy = question.CreatedBy,
-
-
-
-                 // Map AnswerOptions to OptionDto
-                 AnswerOptions = question.AnswerMasters
-                                 .Select(am => new OptionDto
-                                 {
-                                     Id = am.AnswerOption?.Id, 
-                                     OptionValue = am.AnswerOption?.OptionValue,
-                                     NextQuestionID = am.NextQuestionId 
-                                 })
-                                 .Where(option => option.OptionValue != null)
-                                 .ToList(),
-
-             };
-
-             return mappedQuestion;*/
-
             var question = await _questionRepository.GetQuestionById(questionId);
 
             if (question == null)
@@ -293,7 +248,20 @@ namespace DynamicFormsBackend.Service.FormCreation
                         existingOption.ModifiedBy = 1;
                         existingOption.ModifiedOn = DateTime.Now;
                         await _questionRepository.UpdateAnswerOption(existingOption);
+
+
+                        //Changed Part
+                        var existingAnswerMaster = existingAnswerMasters.FirstOrDefault(am => am.AnswerOptionId == option.Id);
+                        if (existingAnswerMaster != null)
+                        {
+                            existingAnswerMaster.NextQuestionId = questionDetail.AnswerOptions
+                                .FirstOrDefault(o => o.Id == option.Id)?.NextQuestionID;
+
+                            await _questionRepository.UpdateAnswerMaster(existingAnswerMaster);
+                        }
                     }
+
+
                     else
                     {
                         // Add new options

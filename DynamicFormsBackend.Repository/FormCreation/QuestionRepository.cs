@@ -180,7 +180,7 @@ namespace DynamicFormsBackend.Repository.FormCreation
 
         public async Task UpdateAnswerOption(AnswerOption optionDetails)
         {
-            _context.AnswerOptions.Attach(optionDetails);
+            _context.AnswerOptions.Add(optionDetails);
             _context.Entry(optionDetails).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }

@@ -116,6 +116,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                                 Question = qsm.Question.Question,
                                 slno = qsm.Question.Slno,
                                 AnswerTypeId = qsm.Question.AnswerTypeId,
+                                Required = qsm.Question.Required,
                                 DataType = qsm.Question.DataType,
                                 Constraint = qsm.Question.Constraint,
                                 ConstraintValue = qsm.Question.ConstraintValue,

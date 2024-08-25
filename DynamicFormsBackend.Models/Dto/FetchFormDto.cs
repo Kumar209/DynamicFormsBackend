@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,8 @@ namespace DynamicFormsBackend.Models.Dto
         public int? slno { get; set; }
 
         public int? AnswerTypeId { get; set; }
+
+        public bool? Required { get; set; }
 
         public string AnswerType { get; set; }  
         public string? DataType { get; set; }
