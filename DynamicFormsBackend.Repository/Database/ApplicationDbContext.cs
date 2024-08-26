@@ -156,8 +156,8 @@ public partial class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__FormResp__3214EC074C9AFFC7");
 
             entity.ToTable("FormResponse");
-
-            entity.HasIndex(e => e.Email, "UQ__FormResp__A9D10534F41BC516").IsUnique();
+/*
+            entity.HasIndex(e => e.Email, "UQ__FormResp__A9D10534F41BC516").IsUnique();*/
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedOn).HasColumnType("datetime");
