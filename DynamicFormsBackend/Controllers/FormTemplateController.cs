@@ -36,6 +36,15 @@ namespace DynamicFormsBackend.Controllers
                 return BadRequest(new {success=false, message= ResponseMessage.NullTemplateError });
             }
 
+            // Validate that at least one question ID is present in each section
+            foreach (var section in templateDto.Sections)
+            {
+                if (section.SelectedQuestions == null || !section.SelectedQuestions.Any())
+                {
+                    return BadRequest(new { success = false, message = ResponseMessage.NoQuestionsInSectionError });
+                }
+            }
+
             try
             {
                 var res = await _formService.AddSourceTemplate(templateDto);
