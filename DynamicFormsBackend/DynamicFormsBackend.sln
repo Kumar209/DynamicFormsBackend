@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend", "DynamicFormsBackend.csproj", "{DEC80268-AED4-4922-B36F-42F49B831ABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsBackend", "DynamicFormsBackend.csproj", "{DEC80268-AED4-4922-B36F-42F49B831ABE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend.ServiceInterface", "..\DynamicFormsBackend.ServiceInterface\DynamicFormsBackend.ServiceInterface.csproj", "{E293C9CE-5C6A-446D-89FD-F75126A82F8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsBackend.ServiceInterface", "..\DynamicFormsBackend.ServiceInterface\DynamicFormsBackend.ServiceInterface.csproj", "{E293C9CE-5C6A-446D-89FD-F75126A82F8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend.Service", "..\DynamicFormsBackend.Service\DynamicFormsBackend.Service.csproj", "{FAA11656-BD9D-4274-85AA-CA217AC69950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsBackend.Service", "..\DynamicFormsBackend.Service\DynamicFormsBackend.Service.csproj", "{FAA11656-BD9D-4274-85AA-CA217AC69950}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend.RepositoryInterface", "..\DynamicFormsBackend.RepositoryInterface\DynamicFormsBackend.RepositoryInterface.csproj", "{2F9F82F8-3B11-4BC4-BE04-11CE848AC1B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsBackend.RepositoryInterface", "..\DynamicFormsBackend.RepositoryInterface\DynamicFormsBackend.RepositoryInterface.csproj", "{2F9F82F8-3B11-4BC4-BE04-11CE848AC1B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend.Repository", "..\DynamicFormsBackend.Repository\DynamicFormsBackend.Repository.csproj", "{3B158447-D076-41EC-8699-A46D863E5BEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsBackend.Repository", "..\DynamicFormsBackend.Repository\DynamicFormsBackend.Repository.csproj", "{3B158447-D076-41EC-8699-A46D863E5BEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend.Shared", "..\DynamicFormsBackend.Shared\DynamicFormsBackend.Shared.csproj", "{F494E3E6-DCF6-4901-B072-0B3C3027BC32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsBackend.Shared", "..\DynamicFormsBackend.Shared\DynamicFormsBackend.Shared.csproj", "{F494E3E6-DCF6-4901-B072-0B3C3027BC32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend.Models", "..\DynamicFormsBackend.Models\DynamicFormsBackend.Models.csproj", "{86BCACF7-518D-469C-8CF2-5E466CABA217}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFormsBackend.Models", "..\DynamicFormsBackend.Models\DynamicFormsBackend.Models.csproj", "{86BCACF7-518D-469C-8CF2-5E466CABA217}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFormsBackend.Test", "..\DynamicFormsBackend.Test\DynamicFormsBackend.Test.csproj", "{3EEB28C7-950B-4C18-BC54-96DC05D9EBF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{86BCACF7-518D-469C-8CF2-5E466CABA217}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BCACF7-518D-469C-8CF2-5E466CABA217}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86BCACF7-518D-469C-8CF2-5E466CABA217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EEB28C7-950B-4C18-BC54-96DC05D9EBF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EEB28C7-950B-4C18-BC54-96DC05D9EBF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EEB28C7-950B-4C18-BC54-96DC05D9EBF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EEB28C7-950B-4C18-BC54-96DC05D9EBF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

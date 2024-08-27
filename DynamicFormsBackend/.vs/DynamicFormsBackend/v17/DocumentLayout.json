@@ -3,10 +3,7 @@
   "WorkspaceRootPath": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3B158447-D076-41EC-8699-A46D863E5BEE}|..\\DynamicFormsBackend.Repository\\DynamicFormsBackend.Repository.csproj|c:\\prashant_office_work\\dynamic forms\\dynamicformsbackend\\dynamicformsbackend.repository\\response\\formresponserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3B158447-D076-41EC-8699-A46D863E5BEE}|..\\DynamicFormsBackend.Repository\\DynamicFormsBackend.Repository.csproj|c:\\prashant_office_work\\dynamic forms\\dynamicformsbackend\\dynamicformsbackend.repository\\database\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3EEB28C7-950B-4C18-BC54-96DC05D9EBF5}|..\\DynamicFormsBackend.Test\\DynamicFormsBackend.Test.csproj|c:\\prashant_office_work\\dynamic forms\\dynamicformsbackend\\dynamicformsbackend.test\\controllers\\authcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -16,32 +13,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Repository\\Database\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "..\\DynamicFormsBackend.Repository\\Database\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Repository\\Database\\ApplicationDbContext.cs",
-              "RelativeToolTip": "..\\DynamicFormsBackend.Repository\\Database\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAJYAAAAAAAAAAAAIwJ4AAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T10:29:27.716Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FormResponseRepository.cs",
-              "DocumentMoniker": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Repository\\Response\\FormResponseRepository.cs",
-              "RelativeDocumentMoniker": "..\\DynamicFormsBackend.Repository\\Response\\FormResponseRepository.cs",
-              "ToolTip": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Repository\\Response\\FormResponseRepository.cs",
-              "RelativeToolTip": "..\\DynamicFormsBackend.Repository\\Response\\FormResponseRepository.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAQwBwAAAAJAAAA",
+              "Title": "AuthControllerTests.cs",
+              "DocumentMoniker": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
+              "RelativeDocumentMoniker": "..\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
+              "ToolTip": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
+              "RelativeToolTip": "..\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAowBsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T10:26:26.557Z",
+              "WhenOpened": "2024-08-27T04:08:23.042Z",
               "EditorCaption": ""
             }
           ]
