@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DynamicFormsBackend.Models")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+360d0f2feedd9fab777ea9425be6fbe9f1889b87")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+933b873c781da0c66562aa06c0a9867a4604a0fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("DynamicFormsBackend.Models")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DynamicFormsBackend.Models")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

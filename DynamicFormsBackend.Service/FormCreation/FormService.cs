@@ -59,6 +59,11 @@ namespace DynamicFormsBackend.Service.FormCreation
 
                 var createdSection = await _formRepository.InsertSection(mappedSection);
 
+                if(createdSection == null)
+                {
+                    return (false, res.Id);
+                }
+
 
                 foreach (var questionId in sectionDto.SelectedQuestions)
                 {
