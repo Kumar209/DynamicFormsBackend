@@ -1,36 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{3EEB28C7-950B-4C18-BC54-96DC05D9EBF5}|..\\DynamicFormsBackend.Test\\DynamicFormsBackend.Test.csproj|c:\\prashant_office_work\\dynamic forms\\dynamicformsbackend\\dynamicformsbackend.test\\controllers\\authcontrollertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthControllerTests.cs",
-              "DocumentMoniker": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
-              "RelativeDocumentMoniker": "..\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
-              "ToolTip": "C:\\Prashant_Office_work\\Dynamic Forms\\DynamicFormsBackend\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
-              "RelativeToolTip": "..\\DynamicFormsBackend.Test\\Controllers\\AuthControllerTests.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAowBsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-27T04:08:23.042Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
