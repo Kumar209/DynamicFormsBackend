@@ -11,6 +11,6 @@ namespace DynamicFormsBackend.ServiceInterface
     {
         public Task<string> GenerateToken(DynamicFormUser user);
 
-        public Task<int> ValidateJwtToken(string token);
+        public Task<Dictionary<string, string>> ValidateJwtToken(string token);
     }
 }

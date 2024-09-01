@@ -28,19 +28,14 @@ namespace DynamicFormsBackend.Repository.FormCreation
         }
 
 
-        public async Task<FormQuestion> GetQuestionById(int id)
+        public async Task<FormQuestion> GetQuestionById(int id, int userId)
         {
-            /* var question = await _context.Set<FormQuestion>()
-                                 .Include(q => q.AnswerMasters)
-                                 .ThenInclude(am => am.AnswerOption)
-                                 .ThenInclude(ao => ao.AnswerType)
-                                 .FirstOrDefaultAsync(q => q.Id == id && q.Active == true);*/
 
             var question = await _context.Set<FormQuestion>()
                                  .Include(q => q.AnswerMasters)
                                  .ThenInclude(am => am.AnswerOption)
                                  .ThenInclude(ao => ao.AnswerType)
-                                 .Where(q => q.Id == id && q.Active == true)
+                                 .Where(q => q.Id == id && q.Active == true && q.UserId == userId)
                                  .FirstOrDefaultAsync();
 
             if (question != null)
@@ -52,14 +47,14 @@ namespace DynamicFormsBackend.Repository.FormCreation
         }
 
 
-        public async Task<IEnumerable<FormQuestion>> GetQuestions()
+        public async Task<IEnumerable<FormQuestion>> GetQuestions(int userId)
         {
 
             var questions = await _context.FormQuestions
                              .Include(q => q.AnswerMasters)
                              .ThenInclude(am => am.AnswerOption)
                              .ThenInclude(ao => ao.AnswerType)
-                             .Where(fq => fq.Active == true)
+                             .Where(fq => fq.Active == true && fq.UserId == userId)
                              .ToListAsync();
 
             return questions;
@@ -94,11 +89,11 @@ namespace DynamicFormsBackend.Repository.FormCreation
 
 
 
-        public async Task<bool> DeleteQuestionAsync(int questionId)
+        public async Task<bool> DeleteQuestionAsync(int questionId, int userId)
         {
             // Find the question in the database
             var question = await _context.FormQuestions
-                                .FirstOrDefaultAsync(fq => fq.Active == true && fq.Id == questionId);
+                                .FirstOrDefaultAsync(fq => fq.Active == true && fq.Id == questionId && fq.UserId == userId);
 
             if (question == null)
             {
@@ -108,7 +103,7 @@ namespace DynamicFormsBackend.Repository.FormCreation
             // Soft delete the question
             question.Active = false;
             question.DeletedOn = DateTime.Now;
-            question.DeletedBy = 1;
+            question.DeletedBy = userId;
 
             // Find related answer masters for this question
             var answerMasters = await _context.AnswerMasters
@@ -134,7 +129,7 @@ namespace DynamicFormsBackend.Repository.FormCreation
             {
                 option.Active = false;
                 option.DeletedOn = DateTime.Now;
-                option.DeletedBy = 1;
+                option.DeletedBy = userId;
             }
 
 

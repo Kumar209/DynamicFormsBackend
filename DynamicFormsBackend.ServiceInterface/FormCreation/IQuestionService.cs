@@ -12,15 +12,15 @@ namespace DynamicFormsBackend.ServiceInterface.FormCreation
     {
         public Task<IEnumerable<AnswerTypesDto>> GetAnswerTypes();
 
-        public Task<IEnumerable<AllQuestionDto>> GetAllQuestions();
+        public Task<IEnumerable<AllQuestionDto>> GetAllQuestions(int userId);
 
-        public Task<QuestionDto> GetQuestion(int questionId);
+        public Task<QuestionDto> GetQuestion(int questionId, int userId);
 
-        public Task<(bool success, int questionId)> AddQuestion(QuestionDto questionDetail);
+        public Task<(bool success, int questionId)> AddQuestion(QuestionDto questionDetail, int userId);
 
-        public Task<bool> DeleteQuestionById(int questionId);
+        public Task<bool> DeleteQuestionById(int questionId, int userId);
 
-        public Task<(bool success, string message)> UpdateQuestion(QuestionDto questionDetail);
+        public Task<(bool success, string message)> UpdateQuestion(QuestionDto questionDetail, int userId);
 
     }
 }

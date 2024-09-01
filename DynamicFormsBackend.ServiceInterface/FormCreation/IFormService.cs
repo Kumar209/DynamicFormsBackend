@@ -11,17 +11,18 @@ namespace DynamicFormsBackend.ServiceInterface.FormCreation
 {
     public interface IFormService
     {
-        public Task<(bool success, int formid)> AddSourceTemplate(SourceTemplateDto sourceTemplateDetails);
+        public Task<(bool success, int formid)> AddSourceTemplate(SourceTemplateDto sourceTemplateDetails, int userId);
 
-        public Task<IEnumerable<SourceTemplate>> Getforms();
-
-
-        public Task<FetchFormDto> GetFormById(int formId);
+        public Task<IEnumerable<SourceTemplate>> Getforms(int userId);
 
 
-        public Task<bool> RemoveFormById(int formId);
+        public Task<FetchFormDto> GetFormById(int formId, int userId);
 
 
-        public Task<bool> UpdateSourceTemplate(int formId, SourceTemplateDto sourceTemplateDetails);
+        public Task<bool> RemoveFormById(int formId, int userId);
+
+
+
+        public Task<bool> UpdateSourceTemplate(int formId, SourceTemplateDto sourceTemplateDetails, int userId);
     }
 }

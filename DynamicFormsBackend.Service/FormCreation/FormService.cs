@@ -26,7 +26,7 @@ namespace DynamicFormsBackend.Service.FormCreation
             _formRepository = formRepository;
         }
         
-       public async Task<(bool success, int formid)> AddSourceTemplate(SourceTemplateDto sourceTemplateDetails)
+       public async Task<(bool success, int formid)> AddSourceTemplate(SourceTemplateDto sourceTemplateDetails, int userId)
         {
             var mappedEntity = new SourceTemplate
             {
@@ -34,9 +34,9 @@ namespace DynamicFormsBackend.Service.FormCreation
                 Description = sourceTemplateDetails.Description,
                 IsPublish = sourceTemplateDetails.IsPublish,
                 Version = sourceTemplateDetails.Version,
-                UserId = 1,
+                UserId = userId,
                 CreatedOn = DateTime.Now,
-                CreatedBy = 1,
+                CreatedBy = userId,
                 Active = true,
             };
 
@@ -83,11 +83,11 @@ namespace DynamicFormsBackend.Service.FormCreation
         }
 
 
-        public async Task<FetchFormDto> GetFormById(int formId)
+        public async Task<FetchFormDto> GetFormById(int formId, int userId)
         {
 
 
-            var formEntity = await _formRepository.GetSourceTemplateById(formId);
+            var formEntity = await _formRepository.GetSourceTemplateById(formId, userId);
 
             if (formEntity == null)
             {
@@ -145,22 +145,25 @@ namespace DynamicFormsBackend.Service.FormCreation
         }
 
 
-        public async Task<bool> RemoveFormById(int formId)
+        public async Task<bool> RemoveFormById(int formId , int userId)
         {
-            return await _formRepository.SoftDeleteFormAsync(formId);
+            return await _formRepository.SoftDeleteFormAsync(formId, userId);
         }
 
 
-        public async Task<IEnumerable<SourceTemplate>> Getforms()
+        public async Task<IEnumerable<SourceTemplate>> Getforms(int userId)
         {
-            var forms = await _formRepository.GetSourceTemplates();
+            var forms = await _formRepository.GetSourceTemplates(userId);
             return forms;
         }
 
 
-        public async Task<bool> UpdateSourceTemplate(int formId, SourceTemplateDto sourceTemplateDetails)
+
+
+
+        public async Task<bool> UpdateSourceTemplate(int formId, SourceTemplateDto sourceTemplateDetails, int userId)
         {
-            var existingTemplate = await _formRepository.GetSourceTemplateById(formId);
+            var existingTemplate = await _formRepository.GetSourceTemplateById(formId, userId);
 
             if (existingTemplate == null)
             {
@@ -172,7 +175,7 @@ namespace DynamicFormsBackend.Service.FormCreation
             existingTemplate.Description = sourceTemplateDetails.Description;
             existingTemplate.IsPublish = sourceTemplateDetails.IsPublish;
             existingTemplate.Version = sourceTemplateDetails.Version + 1;
-            existingTemplate.ModifiedBy = 1;
+            existingTemplate.ModifiedBy = userId;
             existingTemplate.ModifiedOn = DateTime.Now;
 
             // Update the template in the database
@@ -198,7 +201,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                         existingSection.SectionName = sectionDto.SectionName;
                         existingSection.Description = sectionDto.Description;
                         existingSection.Slno = sectionDto.Slno;
-                        existingSection.ModifiedBy = 1;
+                        existingSection.ModifiedBy = userId;
                         existingSection.ModifiedOn = DateTime.Now;
                         await _formRepository.UpdateSection(existingSection);
                         newSectionIds.Add(existingSection.Id);

@@ -1,4 +1,5 @@
 ﻿using DynamicFormsBackend.Models.Entities;
+using DynamicFormsBackend.Service;
 using DynamicFormsBackend.ServiceInterface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -28,6 +29,8 @@ namespace DynamicFormsBackend.Service
                     new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti , Guid.NewGuid().ToString()),
                     new Claim("Id", user.Id.ToString()),
+                    new Claim("Role", user.Role.RoleName.ToString()),
+                    new Claim("RoleId", user.RoleId.ToString()),
                     new Claim("Email", user.Email.ToString())
                 };
 
@@ -56,7 +59,7 @@ namespace DynamicFormsBackend.Service
 
 
         // Validate a JWT token
-        public async Task<int> ValidateJwtToken(string token)
+        public async Task<Dictionary<string, string>> ValidateJwtToken(string token)
         {
             var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 
@@ -79,12 +82,25 @@ namespace DynamicFormsBackend.Service
             // If the token is valid, return the user ID
             if (principal.Identity.IsAuthenticated)
             {
-                var Id = int.Parse(principal.FindFirst("Id")?.Value ?? "0");
-                return Id;
+                /*var Id = int.Parse(principal.FindFirst("Id")?.Value ?? "0");
+                return Id;*/
+
+                return principal.Claims.ToDictionary(c => c.Type, c => c.Value);
             }
 
-            return -1;
-
+            return null;
         }
     }
 }
+
+
+
+
+/*var claims = await jwtService.ValidateJwtToken(token);
+if (claims != null)
+{
+    var userId = claims["Id"];
+    var role = claims["Role"];
+    var email = claims["Email"];
+    // Access other claims as needed
+}*/

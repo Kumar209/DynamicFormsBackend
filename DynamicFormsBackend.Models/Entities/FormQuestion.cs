@@ -39,7 +39,11 @@ public partial class FormQuestion
 
     public int? DeletedBy { get; set; }
 
-    public virtual ICollection<AnswerMaster> AnswerMasters { get; set; } 
+    public int? UserId { get; set; }
 
-    public virtual ICollection<QuestionSectionMapping> QuestionSectionMappings { get; set; } 
+    public virtual ICollection<AnswerMaster> AnswerMasters { get; set; } = new List<AnswerMaster>();
+
+    public virtual ICollection<QuestionSectionMapping> QuestionSectionMappings { get; set; } = new List<QuestionSectionMapping>();
+
+    public virtual DynamicFormUser? User { get; set; }
 }

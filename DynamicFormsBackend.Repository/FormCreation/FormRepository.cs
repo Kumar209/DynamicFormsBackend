@@ -36,10 +36,10 @@ namespace DynamicFormsBackend.Repository.FormCreation
                 return data;
         }
 
-        public async Task<IEnumerable<SourceTemplate>> GetSourceTemplates()
+        public async Task<IEnumerable<SourceTemplate>> GetSourceTemplates(int userId)
         {
             var forms = await _context.SourceTemplates
-                              .Where(Fq => Fq.Active == true)
+                              .Where(Fq => Fq.Active == true && Fq.UserId == userId)
                               .ToListAsync();
 
             return forms;
@@ -47,7 +47,7 @@ namespace DynamicFormsBackend.Repository.FormCreation
         }
 
 
-        public async Task<SourceTemplate> GetSourceTemplateById(int formId)
+        public async Task<SourceTemplate> GetSourceTemplateById(int formId, int userId)
         {
 
 
@@ -60,7 +60,7 @@ namespace DynamicFormsBackend.Repository.FormCreation
                                         .ThenInclude(q => q.AnswerMasters
                                             .Where(am => am.Active == true)) // Filter active answer masters
                                     .ThenInclude(am => am.AnswerOption)
-                                    .FirstOrDefaultAsync(f => f.Id == formId && f.Active == true);
+                                    .FirstOrDefaultAsync(f => f.Id == formId && f.Active == true && f.UserId == userId);
 
 
 
@@ -71,16 +71,16 @@ namespace DynamicFormsBackend.Repository.FormCreation
 
 
 
-        public async Task<bool> SoftDeleteFormAsync(int formId)
+        public async Task<bool> SoftDeleteFormAsync(int formId, int userId)
         {
-            var form = await _context.SourceTemplates.FirstOrDefaultAsync(f => f.Id == formId && f.Active == true);
+            var form = await _context.SourceTemplates.FirstOrDefaultAsync(f => f.Id == formId && f.Active == true && f.UserId == userId);
 
             if (form == null) return false;
 
             // Soft delete the form
             form.Active = false;
             form.DeletedOn = DateTime.Now;
-            form.DeletedBy = 1;
+            form.DeletedBy = userId;
 
             // Soft delete related sections
             var sections = await _context.TemplateSections
@@ -91,7 +91,7 @@ namespace DynamicFormsBackend.Repository.FormCreation
             {
                 section.Active = false;
                 section.DeletedOn = DateTime.Now;
-                section.DeletedBy = 1;
+                section.DeletedBy = userId;
 
                 // Soft delete related question-section mappings
                 var mappings = await _context.QuestionSectionMappings
@@ -108,6 +108,9 @@ namespace DynamicFormsBackend.Repository.FormCreation
 
             return true;
         }
+
+
+
 
         public async Task<bool> UpdateSourceTemplate(SourceTemplate template)
         {

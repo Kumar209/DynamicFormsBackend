@@ -11,9 +11,9 @@ namespace DynamicFormsBackend.RepositoryInterface.FormCreation
     {
         public Task<IEnumerable<AnswerType>> GetAnswerTypes();
 
-        public Task<IEnumerable<FormQuestion>> GetQuestions();
+        public Task<IEnumerable<FormQuestion>> GetQuestions(int userId);
 
-        public Task<FormQuestion> GetQuestionById(int id);
+        public Task<FormQuestion> GetQuestionById(int id, int userId);
 
         public Task<(bool success, int questionId)> InsertQuestion(FormQuestion questionDetail);
 
@@ -21,7 +21,7 @@ namespace DynamicFormsBackend.RepositoryInterface.FormCreation
 
         public Task<AnswerMaster> InsertAnswerMaster(AnswerMaster data);
 
-        public Task<bool> DeleteQuestionAsync(int questionId);
+        public Task<bool> DeleteQuestionAsync(int questionId, int userId);
 
 
 

@@ -39,9 +39,9 @@ namespace DynamicFormsBackend.Service.FormCreation
 
 
 
-        public async Task<IEnumerable<AllQuestionDto>> GetAllQuestions()
+        public async Task<IEnumerable<AllQuestionDto>> GetAllQuestions(int userId)
         {
-            var res = await _questionRepository.GetQuestions();
+            var res = await _questionRepository.GetQuestions(userId);
 
 
             var mappedDto = res.Select(ans => new AllQuestionDto
@@ -74,7 +74,7 @@ namespace DynamicFormsBackend.Service.FormCreation
 
 
 
-        public async Task<(bool success, int questionId)> AddQuestion(QuestionDto questionDetail)
+        public async Task<(bool success, int questionId)> AddQuestion(QuestionDto questionDetail, int userId)
         {
             var mappedData = new FormQuestion
             {
@@ -87,7 +87,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                 Constraint = questionDetail.Constraint,
                 ConstraintValue = questionDetail.ConstraintValue,
                 WarningMessage = questionDetail.WarningMessage,
-                CreatedBy = 1,
+                CreatedBy = userId,
                 CreatedOn = DateTime.Now,
                 Active = true,
             };
@@ -104,7 +104,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                     {
                         AnswerTypeId = questionDetail.AnswerTypeId,
                         OptionValue = option.OptionValue,
-                        CreatedBy = 1,
+                        CreatedBy = userId,
                         CreatedOn = DateTime.Now,
                         Active = true,
                     };
@@ -131,9 +131,9 @@ namespace DynamicFormsBackend.Service.FormCreation
 
 
 
-        public async Task<QuestionDto> GetQuestion(int questionId)
+        public async Task<QuestionDto> GetQuestion(int questionId, int userId)
         {
-            var question = await _questionRepository.GetQuestionById(questionId);
+            var question = await _questionRepository.GetQuestionById(questionId, userId);
 
             if (question == null)
             {
@@ -184,9 +184,9 @@ namespace DynamicFormsBackend.Service.FormCreation
 
 
 
-        public async Task<bool> DeleteQuestionById(int questionId)
+        public async Task<bool> DeleteQuestionById(int questionId , int userId)
         {
-            return await _questionRepository.DeleteQuestionAsync(questionId);
+            return await _questionRepository.DeleteQuestionAsync(questionId, userId);
         }
 
 
@@ -194,10 +194,10 @@ namespace DynamicFormsBackend.Service.FormCreation
 
 
 
-        public async Task<(bool success, string message)> UpdateQuestion(QuestionDto questionDetail)
+        public async Task<(bool success, string message)> UpdateQuestion(QuestionDto questionDetail , int userId)
         {
             // Get the existing question
-            var existingQuestion = await _questionRepository.GetQuestionById(questionDetail.Id ?? 0);
+            var existingQuestion = await _questionRepository.GetQuestionById(questionDetail.Id ?? 0, userId);
 
             if (existingQuestion == null)
             {
@@ -214,7 +214,7 @@ namespace DynamicFormsBackend.Service.FormCreation
             existingQuestion.Constraint = questionDetail.Constraint;
             existingQuestion.ConstraintValue = questionDetail.ConstraintValue;
             existingQuestion.WarningMessage = questionDetail.WarningMessage;
-            existingQuestion.ModifiedBy = 1;
+            existingQuestion.ModifiedBy = userId;
             existingQuestion.ModifiedOn = DateTime.Now;
             existingQuestion.Active = true;
 
@@ -233,7 +233,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                     Id = option.Id ?? 0,
                     AnswerTypeId = questionDetail.AnswerTypeId,
                     OptionValue = option.OptionValue,
-                    ModifiedBy = 1,
+                    ModifiedBy = userId,
                     ModifiedOn = DateTime.Now,
                     Active = true,
                 }).ToList();
@@ -290,7 +290,7 @@ namespace DynamicFormsBackend.Service.FormCreation
                     if (deletedOption != null)
                     {
                         deletedOption.Active = false;
-                        deletedOption.DeletedBy = 1;
+                        deletedOption.DeletedBy = userId;
                         deletedOption.DeletedOn = DateTime.Now;
                         await _questionRepository.UpdateAnswerOption(deletedOption);
 

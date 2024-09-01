@@ -20,6 +20,7 @@ namespace DynamicFormsBackend.Repository.Authentication
         public async Task<DynamicFormUser> GetUserByEmailPassword(string email, string password)
         {
             var user = await _context.DynamicFormUsers
+                       .Include(r => r.Role)
                        .FirstOrDefaultAsync(u => u.Email == email && u.Password == password && u.Active == true);
 
             return user;

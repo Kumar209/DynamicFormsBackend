@@ -14,12 +14,12 @@ namespace DynamicFormsBackend.RepositoryInterface.FormCreation
 
         public Task<QuestionSectionMapping> InsertQuestionSectionMappingEntry(QuestionSectionMapping data);
 
-        public Task<IEnumerable<SourceTemplate>> GetSourceTemplates();
+        public Task<IEnumerable<SourceTemplate>> GetSourceTemplates(int userId);
 
-        public Task<SourceTemplate> GetSourceTemplateById(int formId);
+        public Task<SourceTemplate> GetSourceTemplateById(int formId, int userId);
 
 
-        public Task<bool> SoftDeleteFormAsync(int formId);
+        public Task<bool> SoftDeleteFormAsync(int formId, int userId);
 
         public Task<bool> UpdateSourceTemplate(SourceTemplate template);
 

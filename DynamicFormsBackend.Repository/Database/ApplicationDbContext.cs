@@ -23,6 +23,8 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<DynamicFormUser> DynamicFormUsers { get; set; }
 
+    public virtual DbSet<DynamicFormsRole> DynamicFormsRoles { get; set; }
+
     public virtual DbSet<FormQuestion> FormQuestions { get; set; }
 
     public virtual DbSet<FormResponse> FormResponses { get; set; }
@@ -40,7 +42,7 @@ public partial class ApplicationDbContext : DbContext
     {
         modelBuilder.Entity<AnswerMaster>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AnswerMa__3214EC07782CB15F");
+            entity.HasKey(e => e.Id).HasName("PK__AnswerMa__3214EC07B8D83B8A");
 
             entity.ToTable("AnswerMaster");
 
@@ -49,25 +51,17 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.AnswerOption).WithMany(p => p.AnswerMasters)
                 .HasForeignKey(d => d.AnswerOptionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AnswerMas__Answe__062DE679");
+                .HasConstraintName("FK__AnswerMas__Answe__2ACC04F9");
 
             entity.HasOne(d => d.Question).WithMany(p => p.AnswerMasters)
                 .HasForeignKey(d => d.QuestionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AnswerMas__Quest__0539C240");
-
-            entity.HasOne(d => d.AnswerOption).WithMany(p => p.AnswerMasters)
-          .HasForeignKey(d => d.AnswerOptionId)
-          .OnDelete(DeleteBehavior.Cascade); // Add cascading delete
-
-            entity.HasOne(d => d.Question).WithMany(p => p.AnswerMasters)
-                .HasForeignKey(d => d.QuestionId)
-                .OnDelete(DeleteBehavior.Cascade); // Add cascading delet
+                .HasConstraintName("FK__AnswerMas__Quest__29D7E0C0");
         });
 
         modelBuilder.Entity<AnswerOption>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AnswerOp__3214EC0754051D62");
+            entity.HasKey(e => e.Id).HasName("PK__AnswerOp__3214EC07DBBD0D83");
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedOn).HasColumnType("datetime");
@@ -79,16 +73,12 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.AnswerType).WithMany(p => p.AnswerOptions)
                 .HasForeignKey(d => d.AnswerTypeId)
-                .HasConstraintName("FK__AnswerOpt__Answe__0169315C");
-
-            entity.HasOne(d => d.AnswerType).WithMany(p => p.AnswerOptions)
-        .HasForeignKey(d => d.AnswerTypeId)
-        .OnDelete(DeleteBehavior.Cascade); // Add cascading delete
+                .HasConstraintName("FK__AnswerOpt__Answe__26074FDC");
         });
 
         modelBuilder.Entity<AnswerType>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AnswerTy__3214EC07F3ECB78E");
+            entity.HasKey(e => e.Id).HasName("PK__AnswerTy__3214EC0733007686");
 
             entity.ToTable("AnswerType");
 
@@ -103,11 +93,11 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<DynamicFormUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DynamicF__3214EC074109FBA2");
+            entity.HasKey(e => e.Id).HasName("PK__DynamicF__3214EC070EAF3332");
 
             entity.ToTable("DynamicFormUser");
 
-            entity.HasIndex(e => e.Email, "UQ__DynamicF__A9D10534BD9BCB6E").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__DynamicF__A9D10534AB1149A6").IsUnique();
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedOn)
@@ -121,11 +111,31 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.Role).WithMany(p => p.DynamicFormUsers)
+                .HasForeignKey(d => d.RoleId)
+                .HasConstraintName("FK__DynamicFo__RoleI__12F47B68");
+        });
+
+        modelBuilder.Entity<DynamicFormsRole>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__DynamicF__3214EC0763CEA48E");
+
+            entity.ToTable("DynamicFormsRole");
+
+            entity.HasIndex(e => e.RoleName, "UQ__DynamicF__8A2B6160B2E2C9FD").IsUnique();
+
+            entity.Property(e => e.Description)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.RoleName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<FormQuestion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__FormQues__3214EC0797B235E3");
+            entity.HasKey(e => e.Id).HasName("PK__FormQues__3214EC0788D604CC");
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.Constraint)
@@ -149,15 +159,17 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.WarningMessage)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.User).WithMany(p => p.FormQuestions)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__FormQuest__UserI__1F5A524D");
         });
 
         modelBuilder.Entity<FormResponse>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__FormResp__3214EC074C9AFFC7");
+            entity.HasKey(e => e.Id).HasName("PK__FormResp__3214EC07AB7D1EBB");
 
             entity.ToTable("FormResponse");
-/*
-            entity.HasIndex(e => e.Email, "UQ__FormResp__A9D10534F41BC516").IsUnique();*/
 
             entity.Property(e => e.Active).HasDefaultValue(true);
             entity.Property(e => e.CreatedOn).HasColumnType("datetime");
@@ -169,16 +181,16 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.AnswerMaster).WithMany(p => p.FormResponses)
                 .HasForeignKey(d => d.AnswerMasterId)
-                .HasConstraintName("FK__FormRespo__Answe__0FB750B3");
+                .HasConstraintName("FK__FormRespo__Answe__34556F33");
 
             entity.HasOne(d => d.Form).WithMany(p => p.FormResponses)
                 .HasForeignKey(d => d.FormId)
-                .HasConstraintName("FK__FormRespo__FormI__0EC32C7A");
+                .HasConstraintName("FK__FormRespo__FormI__33614AFA");
         });
 
         modelBuilder.Entity<QuestionSectionMapping>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Question__3214EC07DD0CC560");
+            entity.HasKey(e => e.Id).HasName("PK__Question__3214EC072C346CA5");
 
             entity.ToTable("QuestionSectionMapping");
 
@@ -186,16 +198,16 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.Question).WithMany(p => p.QuestionSectionMappings)
                 .HasForeignKey(d => d.QuestionId)
-                .HasConstraintName("FK__QuestionS__Quest__147C05D0");
+                .HasConstraintName("FK__QuestionS__Quest__2E9C95DD");
 
             entity.HasOne(d => d.Section).WithMany(p => p.QuestionSectionMappings)
                 .HasForeignKey(d => d.SectionId)
-                .HasConstraintName("FK__QuestionS__Secti__15702A09");
+                .HasConstraintName("FK__QuestionS__Secti__2F90BA16");
         });
 
         modelBuilder.Entity<SourceTemplate>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__SourceTe__3214EC07A311A004");
+            entity.HasKey(e => e.Id).HasName("PK__SourceTe__3214EC073360D80E");
 
             entity.ToTable("SourceTemplate");
 
@@ -214,12 +226,12 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.SourceTemplates)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__SourceTem__UserI__740F363E");
+                .HasConstraintName("FK__SourceTem__UserI__17B93085");
         });
 
         modelBuilder.Entity<TemplateSection>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Template__3214EC079E7DC252");
+            entity.HasKey(e => e.Id).HasName("PK__Template__3214EC079E329349");
 
             entity.ToTable("TemplateSection");
 
@@ -236,7 +248,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.Form).WithMany(p => p.TemplateSections)
                 .HasForeignKey(d => d.FormId)
-                .HasConstraintName("FK__TemplateS__FormI__77DFC722");
+                .HasConstraintName("FK__TemplateS__FormI__1B89C169");
         });
 
         OnModelCreatingPartial(modelBuilder);

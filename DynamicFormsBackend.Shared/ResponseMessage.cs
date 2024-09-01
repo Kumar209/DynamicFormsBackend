@@ -16,6 +16,7 @@ namespace DynamicFormsBackend.Shared
         public const string deleteUserSuccess = "User is deleted";
         public const string tokenError = "Your token is expired or invalid token";
         public const string unauthorizeUser = "Unauthorized User";
+        public const string unauthorizedAttempt = "Unauthorized access attempt";
         public const string getdetailMessage = "Success";
         public const string internalServerError = "Internal server error";
 
